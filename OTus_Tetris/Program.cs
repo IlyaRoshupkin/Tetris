@@ -16,6 +16,8 @@ namespace OTus_Tetris
             Point p2 = new Point(5,2, '#');
   
             p2.Draw();
+            Squad squad = new Squad(4, 5, 5, "[]");
+            squad.Draw();
 
             Console.ReadLine();
         }
