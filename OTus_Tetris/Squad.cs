@@ -4,47 +4,15 @@ using System.Text;
 
 namespace OTus_Tetris
 {
-    class Squad
+    class Squad : Figure
     {
-        string blocks;
-        int size;
-        int x; int y;
-        string[][] fig;
-
-        public Squad(int size, int x, int y, string blocks)
+        public Squad(int x, int y, char sym)
         {
-            this.blocks = blocks;
-            this.size = size;
-            fig = new string[size][];
-            for (int i = 0; i < fig.Length; i++)
-            {
-                fig[i] = new string[size];
-                for (int j = 0; j < fig[i].Length; j++)
-                {
-                    fig[i][j] = blocks;
-                }
-            }
-            this.x = x; this.y = y;
+            points[0] = new Point(x, y, sym);
+            points[1] = new Point(x + 1, y, sym);
+            points[2] = new Point(x, y + 1, sym);
+            points[3] = new Point(x+1, y+1, sym);
         }
 
-        public void Draw()
-        {
-            Console.SetCursorPosition(x, y);
-
-            int counts = 0;
-            foreach (string[] arr in fig)
-            {
-                foreach (string sq in arr)
-                {
-                    Console.Write(sq);
-                    counts++;
-                    if (counts == size)
-                    {
-                        counts = 0;
-                        Console.SetCursorPosition(x, ++y);
-                    }
-                }
-            }
-        }
     }
 }

@@ -16,9 +16,12 @@ namespace OTus_Tetris
             Point p2 = new Point(5,2, '#');
   
             p2.Draw();
-            Squad squad = new Squad(4, 5, 5, "[]");
+            
+            Squad squad = new Squad( 5, 5, '*');
             squad.Draw();
 
+            Stick stick = new Stick(7, 6, '*');
+            stick.Draw();
             Console.ReadLine();
         }
        
