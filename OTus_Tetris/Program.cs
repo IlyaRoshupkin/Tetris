@@ -12,52 +12,30 @@ namespace OTus_Tetris
         {
             Console.SetWindowSize(40, 30);
             Console.SetBufferSize(40, 30);
+            FigureGenerator generator = new FigureGenerator(20, 0, '*');
+            Figure s = null;
 
-            Figure st = new Stick(10, 10, '*');
-            st.Draw();
-
-            Thread.Sleep(500);
-            st.Hide();
-            st.Rotate();
-            st.Draw();
-
-            Thread.Sleep(500);
-            st.Hide();
-            st.Move(Directions.LEFT);
-            st.Draw();
-
-            Thread.Sleep(1500);
-            st.Hide();
-            st.Rotate();
-            st.Draw();
-
-            Thread.Sleep(1500);
-            st.Hide();
-            st.Move(Directions.RIGHT);
-            st.Draw();
-
-            Thread.Sleep(500);
-            st.Hide();
-            st.Rotate();
-            st.Draw();
-
-            Thread.Sleep(500);
-            st.Hide();
-            st.Move(Directions.LEFT);
-            st.Draw();
-
-            Thread.Sleep(1500);
-            st.Hide();
-            st.Rotate();
-            st.Draw();
-
-            Thread.Sleep(1500);
-            st.Hide();
-            st.Move(Directions.RIGHT);
-            st.Draw();
-
-            Console.ReadLine();
+            while (true)
+            {
+                FigureFall(s, generator);
+                s.Draw();
+            }
         }
-       
+        
+        static void FigureFall(Figure fig, FigureGenerator generator)
+        {
+            fig = generator.GetNewFigure();
+            fig.Draw();
+                
+            for (int i = 0; i < 15; i++)
+            {
+                fig.Hide();
+                fig.Move(Directions.DOWN);
+                fig.Draw();
+                Thread.Sleep(200);
+            }
+        }
     }
+       
+    
 }

@@ -27,6 +27,7 @@ namespace OTus_Tetris
             }
         }
 
+        
         public abstract void Rotate();
     }
 }
