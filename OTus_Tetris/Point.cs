@@ -23,5 +23,33 @@ namespace OTus_Tetris
             Console.SetCursorPosition(x, y);
             Console.Write(c);
         }
+
+        internal void Hide()
+        {
+            Console.SetCursorPosition(x, y);
+            Console.Write(" ");
+        }
+
+        public void Move(Directions directions)
+        {
+            switch (directions)
+            {
+                case (Directions.DOWN):
+                {
+                        y++;
+                        break;
+                }
+                case (Directions.LEFT):
+                    {
+                        x--;
+                        break;
+                    }
+                case (Directions.RIGHT):
+                    {
+                        x++;
+                        break;
+                    }
+            }
+        }
     }
 }

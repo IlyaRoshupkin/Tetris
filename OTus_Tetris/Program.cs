@@ -1,27 +1,61 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 
 namespace OTus_Tetris
 {
     class Program
     {
+
+       
         static void Main(string[] args)
         {
             Console.SetWindowSize(40, 30);
             Console.SetBufferSize(40, 30);
 
-            Point p1 = new Point(2,3,'*');
-            p1.Draw();
+            Figure st = new Stick(10, 10, '*');
+            st.Draw();
 
-            Point p2 = new Point(5,2, '#');
-  
-            p2.Draw();
-            
-            Squad squad = new Squad( 5, 5, '*');
-            squad.Draw();
+            Thread.Sleep(500);
+            st.Hide();
+            st.Rotate();
+            st.Draw();
 
-            Stick stick = new Stick(7, 6, '*');
-            stick.Draw();
+            Thread.Sleep(500);
+            st.Hide();
+            st.Move(Directions.LEFT);
+            st.Draw();
+
+            Thread.Sleep(1500);
+            st.Hide();
+            st.Rotate();
+            st.Draw();
+
+            Thread.Sleep(1500);
+            st.Hide();
+            st.Move(Directions.RIGHT);
+            st.Draw();
+
+            Thread.Sleep(500);
+            st.Hide();
+            st.Rotate();
+            st.Draw();
+
+            Thread.Sleep(500);
+            st.Hide();
+            st.Move(Directions.LEFT);
+            st.Draw();
+
+            Thread.Sleep(1500);
+            st.Hide();
+            st.Rotate();
+            st.Draw();
+
+            Thread.Sleep(1500);
+            st.Hide();
+            st.Move(Directions.RIGHT);
+            st.Draw();
+
             Console.ReadLine();
         }
        

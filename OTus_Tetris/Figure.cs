@@ -4,14 +4,29 @@ using System.Text;
 
 namespace OTus_Tetris
 {
-    public class Figure
+    public abstract class Figure
     {
-        public Point[] points = new Point[4];
+
+        protected Point[] points = new Point[4];
 
         public void Draw()
         {
-            foreach (Point p in points)
-                p.Draw();
+            foreach (Point p in points) p.Draw();
         }
+
+        public void Hide()
+        {
+            foreach (Point p in points) p.Hide();
+        }
+
+        public void Move(Directions directions)
+        {
+            foreach(Point p in points)
+            {
+                p.Move(directions);
+            }
+        }
+
+        public abstract void Rotate();
     }
 }
