@@ -14,35 +14,49 @@ namespace OTus_Tetris
             points[1] = new Point(x, y + 1, sym);
             points[2] = new Point(x, y + 2, sym);
             points[3] = new Point(x, y + 3, sym);
+            Draw();
+        }
+        public override void TryRotate()
+        {
+            Hide();
+            var clone = Clone();
+            Rotate(clone);
+
+            if (VerifyPosition(clone))
+            {
+                points = clone;
+            }
+
+            Draw();
         }
 
-        public override void Rotate()
+        public void Rotate(Point[] PList)
         {
-            if (points[0].x == points[3].x)
+            if (PList[0].x == PList[3].x)
             {
-                SetHorizontally();
+                SetHorizontally(PList);
             }
             else
             {
-                SetVertically();
+                SetVertically(PList);
             }
         }
 
-        private void SetVertically()
+        private void SetVertically(Point[] PList)
         {
-            for(int i = 0; i < points.Length; i++)
+            for(int i = 0; i < PList.Length; i++)
             {
-                points[i].x -= i;
-                points[i].y += i;
+                PList[i].x -= i;
+                PList[i].y += i;
             }
         }
 
-        private void SetHorizontally()
+        private void SetHorizontally(Point[] PList)
         {
-            for(int i = 0; i < points.Length; i ++)
+            for(int i = 0; i < PList.Length; i ++)
             {
-                points[i].x += i;
-                points[i].y -= i;
+                PList[i].x += i;
+                PList[i].y -= i;
             }
             
         }

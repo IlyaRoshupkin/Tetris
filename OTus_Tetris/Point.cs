@@ -9,7 +9,7 @@ namespace OTus_Tetris
         public int x;
         public int y;
         public char c;
-        
+
 
         public Point(int x, int y, char c)
         {
@@ -18,10 +18,18 @@ namespace OTus_Tetris
             this.c = c;
         }
 
+        public Point(Point point)
+        {
+            this.x = point.x;
+            this.y = point.y;
+            this.c = point.c;
+        }
+
         public void Draw()
         {
             Console.SetCursorPosition(x, y);
             Console.Write(c);
+            Console.SetCursorPosition(0, 0);
         }
 
         internal void Hide()
@@ -40,15 +48,15 @@ namespace OTus_Tetris
                         break;
                 }
                 case (Directions.LEFT):
-                    {
+                {
                         x--;
                         break;
-                    }
+                }
                 case (Directions.RIGHT):
-                    {
+                {
                         x++;
                         break;
-                    }
+                }
             }
         }
     }

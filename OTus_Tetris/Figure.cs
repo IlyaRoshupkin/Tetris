@@ -6,8 +6,8 @@ namespace OTus_Tetris
 {
     public abstract class Figure
     {
-
-        protected Point[] points = new Point[4];
+        public const int LENGHT = 4;
+        protected Point[] points = new Point[LENGHT];
 
         public void Draw()
         {
@@ -18,16 +18,54 @@ namespace OTus_Tetris
         {
             foreach (Point p in points) p.Hide();
         }
-
-        public void Move(Directions directions)
+        
+        internal void TryMove(Directions dir)
         {
-            foreach(Point p in points)
+            Hide();
+            var clone = Clone();
+            Move(clone, dir);
+
+            if (VerifyPosition(clone))
             {
-                p.Move(directions);
+                points = clone;
             }
+
+            Draw();
         }
 
+        protected bool VerifyPosition(Point[] clone)
+        {
+            foreach (var p in clone)
+            {
+                if (p.x < 0 || p.x >= Field.WIDTH ||
+                    p.y < 0 || p.y >= Field.HEIGHT)
+                    return false;
+            }
+                return true;
+        }
+
+        protected Point[] Clone()
+        {
+            var newPoints = new Point[LENGHT];
+            for(int i =0; i < newPoints.Length; i++)
+            {
+                newPoints[i] = new Point(points[i]);
+            }
+            return newPoints;
+        }
+
+        private void Move(Point[] pList, Directions dir)
+        {
+            foreach(var p in pList)
+            {
+                p.Move(dir);
+            }
+        }
         
-        public abstract void Rotate();
+
+        
+        public abstract void TryRotate();
+
+        
     }
 }

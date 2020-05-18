@@ -7,35 +7,56 @@ namespace OTus_Tetris
     class Program
     {
 
-       
+
         static void Main(string[] args)
         {
-            Console.SetWindowSize(40, 30);
-            Console.SetBufferSize(40, 30);
-            FigureGenerator generator = new FigureGenerator(20, 0, '*');
-            Figure s = null;
+            Console.SetWindowSize(Field.WIDTH, Field.HEIGHT);
+            Console.SetBufferSize(Field.WIDTH, Field.HEIGHT);
 
+            Field.SetWidth(20);
+            
+            FigureGenerator generator = new FigureGenerator(20, 0, '*');
+
+
+            Figure currentFigure = generator.GetNewFigure();
             while (true)
             {
-                FigureFall(s, generator);
-                s.Draw();
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey();
+                    WorksWithKey(currentFigure, key);
+                }
             }
+
+            
         }
         
-        static void FigureFall(Figure fig, FigureGenerator generator)
+
+        private static void WorksWithKey(Figure currentFigure, ConsoleKeyInfo key)
         {
-            fig = generator.GetNewFigure();
-            fig.Draw();
-                
-            for (int i = 0; i < 15; i++)
+            switch (key.Key)
             {
-                fig.Hide();
-                fig.Move(Directions.DOWN);
-                fig.Draw();
-                Thread.Sleep(200);
+                case ConsoleKey.RightArrow:
+                    {
+                        currentFigure.TryMove(Directions.RIGHT);
+                        break;
+                    }
+                case ConsoleKey.LeftArrow:
+                    {
+                        currentFigure.TryMove(Directions.LEFT);
+                        break;
+                    }
+                case ConsoleKey.DownArrow:
+                    {
+                        currentFigure.TryMove(Directions.DOWN);
+                        break;
+                    }
+                case ConsoleKey.Spacebar:
+                    {
+                        currentFigure.TryRotate();
+                        break;
+                    }
             }
         }
     }
-       
-    
 }
