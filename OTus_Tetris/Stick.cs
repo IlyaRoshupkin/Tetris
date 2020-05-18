@@ -32,7 +32,7 @@ namespace OTus_Tetris
 
         public void Rotate(Point[] PList)
         {
-            if (PList[0].x == PList[3].x)
+            if (PList[0].X == PList[3].X)
             {
                 SetHorizontally(PList);
             }
@@ -46,8 +46,8 @@ namespace OTus_Tetris
         {
             for(int i = 0; i < PList.Length; i++)
             {
-                PList[i].x -= i;
-                PList[i].y += i;
+                PList[i].X -= i;
+                PList[i].Y += i;
             }
         }
 
@@ -55,8 +55,8 @@ namespace OTus_Tetris
         {
             for(int i = 0; i < PList.Length; i ++)
             {
-                PList[i].x += i;
-                PList[i].y -= i;
+                PList[i].X += i;
+                PList[i].Y -= i;
             }
             
         }

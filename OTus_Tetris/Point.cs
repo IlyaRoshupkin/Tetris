@@ -6,35 +6,35 @@ namespace OTus_Tetris
 {
     public class Point
     {
-        public int x;
-        public int y;
-        public char c;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public char C { get; set; }
 
 
         public Point(int x, int y, char c)
         {
-            this.x = x;
-            this.y = y;
-            this.c = c;
+            X = x;
+            Y = y;
+            C = c;
         }
 
         public Point(Point point)
         {
-            this.x = point.x;
-            this.y = point.y;
-            this.c = point.c;
+            X = point.X;
+            Y = point.Y;
+            C = point.C;
         }
 
         public void Draw()
         {
-            Console.SetCursorPosition(x, y);
-            Console.Write(c);
+            Console.SetCursorPosition(X, Y);
+            Console.Write(C);
             Console.SetCursorPosition(0, 0);
         }
 
         internal void Hide()
         {
-            Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(X, Y);
             Console.Write(" ");
         }
 
@@ -44,17 +44,17 @@ namespace OTus_Tetris
             {
                 case (Directions.DOWN):
                 {
-                        y++;
+                        Y++;
                         break;
                 }
                 case (Directions.LEFT):
                 {
-                        x--;
+                        X--;
                         break;
                 }
                 case (Directions.RIGHT):
                 {
-                        x++;
+                        X++;
                         break;
                 }
             }

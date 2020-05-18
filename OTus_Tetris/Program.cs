@@ -10,14 +10,12 @@ namespace OTus_Tetris
 
         static void Main(string[] args)
         {
-            Console.SetWindowSize(Field.WIDTH, Field.HEIGHT);
-            Console.SetBufferSize(Field.WIDTH, Field.HEIGHT);
+            SetWindowGameSize(Field.Width, Field.Height);
+        
+            Field.Width = 100;
+            Field.Height = 70;
 
-            Field.SetWidth(20);
-            
-            FigureGenerator generator = new FigureGenerator(20, 0, '*');
-
-
+            var generator = new FigureGenerator(20, 20, ')');
             Figure currentFigure = generator.GetNewFigure();
             while (true)
             {
@@ -27,10 +25,13 @@ namespace OTus_Tetris
                     WorksWithKey(currentFigure, key);
                 }
             }
-
-            
         }
-        
+
+        private static void SetWindowGameSize(int width, int height)
+        {
+            Console.SetWindowSize(width, height);
+            Console.SetBufferSize(width, height);
+        }
 
         private static void WorksWithKey(Figure currentFigure, ConsoleKeyInfo key)
         {
