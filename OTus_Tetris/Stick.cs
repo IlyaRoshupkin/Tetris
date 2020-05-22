@@ -10,35 +10,23 @@ namespace OTus_Tetris
         
         public Stick(int x, int y,char sym)
         {
-            points[0] = new Point(x, y, sym);
-            points[1] = new Point(x, y + 1, sym);
-            points[2] = new Point(x, y + 2, sym);
-            points[3] = new Point(x, y + 3, sym);
+            Points[0] = new Point(x, y, sym);
+            Points[1] = new Point(x, y + 1, sym);
+            Points[2] = new Point(x, y + 2, sym);
+            Points[3] = new Point(x, y + 3, sym);
             Draw();
         }
-        public override void TryRotate()
+        
+
+        public override void Rotate()
         {
-            Hide();
-            var clone = Clone();
-            Rotate(clone);
-
-            if (VerifyPosition(clone))
+            if (Points[0].X == Points[3].X)
             {
-                points = clone;
-            }
-
-            Draw();
-        }
-
-        public void Rotate(Point[] PList)
-        {
-            if (PList[0].X == PList[3].X)
-            {
-                SetHorizontally(PList);
+                SetHorizontally(Points);
             }
             else
             {
-                SetVertically(PList);
+                SetVertically(Points);
             }
         }
 

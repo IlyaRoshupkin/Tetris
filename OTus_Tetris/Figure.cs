@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace OTus_Tetris
@@ -7,65 +8,100 @@ namespace OTus_Tetris
     public abstract class Figure
     {
         public const int LENGHT = 4;
-        protected Point[] points = new Point[LENGHT];
+        public Point[] Points = new Point[LENGHT];
+        
 
         public void Draw()
         {
-            foreach (Point p in points) p.Draw();
+            foreach (Point p in Points) p.Draw();
         }
 
         public void Hide()
         {
-            foreach (Point p in points) p.Hide();
+            foreach (Point p in Points) p.Hide();
         }
-        
-        internal void TryMove(Directions dir)
+
+        internal Result TryRotate()
         {
             Hide();
-            var clone = Clone();
-            Move(clone, dir);
 
-            if (VerifyPosition(clone))
+            Rotate();
+
+            var result = VerifyPosition();
+            if (result != Result.SUCCESS)
             {
-                points = clone;
+                Rotate();
             }
 
             Draw();
+            return result;
         }
 
-        protected bool VerifyPosition(Point[] clone)
+        public abstract void Rotate();
+
+        internal Result TryMove(Directions dir)
         {
-            foreach (var p in clone)
+            Hide();
+            
+            Move(dir);
+
+            var result = VerifyPosition();
+            if (result != Result.SUCCESS)
+            {
+                Move(Reverse(dir));
+            }
+
+            Draw();
+            return result;
+        }
+
+        private Directions Reverse(Directions dir)
+        {
+            switch (dir)
+            {
+                case Directions.LEFT: return Directions.RIGHT;
+                case Directions.RIGHT: return Directions.LEFT;
+               case Directions.DOWN: return Directions.UP;
+                default: return Directions.DOWN;
+            }
+        }
+
+        public Result VerifyPosition()
+        {
+            foreach (var p in Points)
             {
                 if (p.X < 0 || p.X >= Field.Width ||
-                    p.Y < 0 || p.Y >= Field.Height)
-                    return false;
+                    p.Y < 0)
+                {
+                    return Result.BORDER_STRIKE;
+                }
+                if (p.Y >= Field.Height)
+                {
+                    return Result.DOWN_BORDER_STRIKE;
+                }
+                if (Field.CheckStrike(p))
+                {
+                    return Result.HEAP_STRIKE;
+                }
             }
-                return true;
+                return Result.SUCCESS;
         }
 
-        protected Point[] Clone()
-        {
-            var newPoints = new Point[LENGHT];
-            for(int i =0; i < newPoints.Length; i++)
-            {
-                newPoints[i] = new Point(points[i]);
-            }
-            return newPoints;
-        }
+       
 
-        private void Move(Point[] pList, Directions dir)
+        private void Move(Directions dir)
         {
-            foreach(var p in pList)
+            foreach(var p in Points)
             {
                 p.Move(dir);
             }
         }
         
-
         
-        public abstract void TryRotate();
 
-        
+        internal bool IsOnTop()
+        {
+            return Points[0].Y == 0;
+        }
     }
 }

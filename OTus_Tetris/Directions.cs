@@ -5,5 +5,7 @@ using System.Text;
 namespace OTus_Tetris
 {
     public enum Directions
-    {LEFT,RIGHT, DOWN}
+    {LEFT,RIGHT, DOWN,
+        UP
+    }
 }

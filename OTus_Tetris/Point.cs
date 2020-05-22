@@ -10,7 +10,6 @@ namespace OTus_Tetris
         public int Y { get; set; }
         public char C { get; set; }
 
-
         public Point(int x, int y, char c)
         {
             X = x;
@@ -42,6 +41,11 @@ namespace OTus_Tetris
         {
             switch (directions)
             {
+                case (Directions.UP):
+                {
+                        Y--;
+                        break;
+                }
                 case (Directions.DOWN):
                 {
                         Y++;
