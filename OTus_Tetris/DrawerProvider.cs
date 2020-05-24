@@ -16,9 +16,5 @@ namespace OTus_Tetris
                 return _drawer;
             }
         }
-        
-            
-
-        
     }
 }

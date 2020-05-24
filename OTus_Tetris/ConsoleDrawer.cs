@@ -19,5 +19,17 @@ namespace OTus_Tetris
             Console.Write(' ');
             Console.SetCursorPosition(0, 0);
         }
+
+        public void InitField()
+        {
+            Console.SetWindowSize(Field.Width, Field.Height);
+            Console.SetBufferSize(Field.Width, Field.Height);
+        }
+
+        public void WriteGameOver()
+        {
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 8, Console.WindowHeight / 2);
+            Console.WriteLine("G A M E  O V E R");
+        }
     }
 }

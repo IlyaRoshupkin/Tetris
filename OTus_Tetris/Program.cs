@@ -16,13 +16,10 @@ namespace OTus_Tetris
 
         static void Main(string[] args)
         {
-            Field.SetWindowGameSize(Field.Width, Field.Height);
+            DrawerProvider.Drawer.InitField();
             
-            generator = new FigureGenerator(Field.Width/2, 0, Drawer.DEFAULT_SYMBOL);
+            generator = new FigureGenerator(Field.Width/2, 0);
             currentFigure = generator.GetNewFigure();
-
-            IDrawer drawer = new ConsoleDrawer2();
-            Test(drawer);
 
             SetTimer();
             while (true)
@@ -63,7 +60,7 @@ namespace OTus_Tetris
                 
                 if(currentFigure.IsOnTop())
                 {
-                    WriteGameOver();
+                    DrawerProvider.Drawer.WriteGameOver();
                     aTimer.Elapsed -= OnTimedEvent;
                     return true;
                 }
@@ -74,12 +71,6 @@ namespace OTus_Tetris
                 }
             }
             else return false;
-        }
-
-        private static void WriteGameOver()
-        {
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 8, Console.WindowHeight / 2);
-            Console.WriteLine("G A M E  O V E R");
         }
 
         private static void Test(IDrawer drawer)
